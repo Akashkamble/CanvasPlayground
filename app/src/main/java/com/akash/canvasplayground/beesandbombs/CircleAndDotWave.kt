@@ -19,10 +19,7 @@ import androidx.compose.ui.graphics.drawscope.withTransform
 
 @Composable
 fun CircleAndDotGrid(modifier: Modifier) {
-    val spacing = 57f
-    val circleRadius = 50f
-    val dotRadius = 7f
-    val diff = spacing - circleRadius
+
 
     val rotation = FloatPropKey()
     val definition = transitionDefinition<Float> {
@@ -42,10 +39,15 @@ fun CircleAndDotGrid(modifier: Modifier) {
     )
 
     Canvas(modifier = modifier.clipToBounds()) {
+        val n = 25
+        val circleRadius = (size.width / n + n / 3)
+        val spacing = circleRadius + n / 3
+        val dotRadius = circleRadius / 7
+        val diff = spacing - circleRadius
         var offsetX = 0f
         var offsetY = 0f
-        for (row in 0..20) {
-            for (col in 0..20) {
+        for (row in 0..n) {
+            for (col in 0..n) {
                 drawCircle(
                     SolidColor(Color.Black),
                     radius = circleRadius,
@@ -54,7 +56,7 @@ fun CircleAndDotGrid(modifier: Modifier) {
                 )
                 withTransform({
                     rotate(
-                        state[rotation] + (row * col) + (col + row) * 15,
+                        (state[rotation] + (row * col) + (col + row) * 15) % 360,
                         offsetX,
                         offsetY - diff - circleRadius
                     )

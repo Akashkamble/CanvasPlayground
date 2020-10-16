@@ -15,5 +15,6 @@ class CanvasViewModel : ViewModel() {
     sealed class Canvas {
         object CircleAndDotWave : Canvas()
         object CirCleGridScale : Canvas()
+        object RotatingSquares : Canvas()
     }
 }

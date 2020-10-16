@@ -16,8 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
-import com.akash.canvasplayground.beesandbombs.CircleAndDotGrid
-import com.akash.canvasplayground.beesandbombs.CircleGridScaleAnimation
 import com.akash.canvasplayground.ui.CanvasPlaygroundTheme
 import com.akash.canvasplayground.viewmodel.CanvasViewModel
 
@@ -67,13 +65,7 @@ fun CanvasContainer(modifier: Modifier = Modifier, canvas: State<CanvasViewModel
             brush = SolidColor(Color.Black)
         )
     ) {
-        when (canvas.value) {
-            CanvasViewModel.Canvas.CircleAndDotWave -> CircleAndDotGrid(
-                modifier = Modifier.fillMaxSize()
-            )
-            CanvasViewModel.Canvas.CirCleGridScale -> CircleGridScaleAnimation(
-                Modifier.fillMaxSize()
-            )
-        }
+        CanvasRepository.getComposable(canvas)
     }
 }
+

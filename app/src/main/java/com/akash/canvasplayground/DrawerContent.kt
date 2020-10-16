@@ -18,23 +18,11 @@ import com.akash.canvasplayground.viewmodel.CanvasViewModel
 @Composable
 fun DrawerContent(onClick: (canvas: CanvasViewModel.Canvas) -> Unit) {
     Column(modifier = Modifier.fillMaxSize()) {
-        DrawerItem(
-            name = "CircleAndDotWave",
-            canvas = CanvasViewModel.Canvas.CircleAndDotWave,
-            onClick = {
-                onClick(it)
-            }
-        )
-        DrawerItem(
-            name = "CircleGridScale",
-            canvas = CanvasViewModel.Canvas.CirCleGridScale,
-            onClick = {
-                onClick(it)
-            }
-        )
+        CanvasRepository.getCanvasList().forEach { data ->
+            DrawerItem(name = data.name, canvas = data.canvas, onClick = { onClick(data.canvas) })
+        }
     }
 }
-
 
 @Composable
 fun DrawerItem(

@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Box
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -13,7 +14,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.unit.dp
 import com.akash.canvasplayground.ui.CanvasPlaygroundTheme
@@ -40,10 +40,22 @@ class MainActivity : AppCompatActivity() {
                         Surface(color = MaterialTheme.colors.background) {
                             Column(
                                 verticalArrangement = Arrangement.Center,
-                                horizontalGravity = Alignment.CenterHorizontally,
+                                horizontalAlignment = Alignment.CenterHorizontally,
                                 modifier = Modifier.fillMaxSize(),
                             ) {
                                 CanvasContainer(canvas = canvas)
+                                Spacer(
+                                    modifier = Modifier.preferredHeightIn(
+                                        min = 20.dp,
+                                        max = 40.dp
+                                    )
+                                )
+                                Text(
+                                    "View more animations",
+                                    modifier = Modifier.clickable(onClick = {
+                                        drawerState.open()
+                                    })
+                                )
                             }
                         }
                     }
@@ -55,15 +67,11 @@ class MainActivity : AppCompatActivity() {
 
 @Composable
 fun CanvasContainer(modifier: Modifier = Modifier, canvas: State<CanvasViewModel.Canvas>) {
-    Box(
-        gravity = Alignment.Center,
+    Surface(
         modifier = modifier
             .preferredHeight(400.dp)
             .preferredWidth(400.dp),
-        border = BorderStroke(
-            width = 2.dp,
-            brush = SolidColor(Color.Black)
-        )
+        border = BorderStroke(width = 2.dp, Color.Black)
     ) {
         CanvasRepository.getComposable(canvas)
     }

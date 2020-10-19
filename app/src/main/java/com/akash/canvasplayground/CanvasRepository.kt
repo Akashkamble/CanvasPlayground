@@ -20,8 +20,8 @@ object CanvasRepository {
                 canvas = CanvasViewModel.Canvas.CircleAndDotWave
             ),
             DrawerItemData(
-                "${CanvasViewModel.Canvas.CirCleGridScale::class.simpleName}",
-                canvas = CanvasViewModel.Canvas.CirCleGridScale
+                "${CanvasViewModel.Canvas.CircleGridScale::class.simpleName}",
+                canvas = CanvasViewModel.Canvas.CircleGridScale
             ),
             DrawerItemData(
                 "${CanvasViewModel.Canvas.RotatingSquares::class.simpleName}",
@@ -36,8 +36,8 @@ object CanvasRepository {
             CanvasViewModel.Canvas.CircleAndDotWave -> CircleAndDotGrid(
                 modifier = Modifier.fillMaxSize()
             )
-            CanvasViewModel.Canvas.CirCleGridScale -> CircleGridScaleAnimation(
-                Modifier.fillMaxSize()
+            CanvasViewModel.Canvas.CircleGridScale -> CircleGridScaleAnimation(
+                modifier = Modifier.fillMaxSize()
             )
             CanvasViewModel.Canvas.RotatingSquares -> RotatingSquares(
                 modifier = Modifier.fillMaxSize()

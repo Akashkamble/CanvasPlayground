@@ -57,8 +57,7 @@ fun CircleAndDotGrid(modifier: Modifier) {
                 withTransform({
                     rotate(
                         (state[rotation] + (row * col) + (col + row) * 15) % 360,
-                        offsetX,
-                        offsetY - diff - circleRadius
+                        Offset(offsetX, offsetY - diff - circleRadius)
                     )
                 }) {
                     drawCircle(

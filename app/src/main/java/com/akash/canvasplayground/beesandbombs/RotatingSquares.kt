@@ -6,7 +6,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.rotate
@@ -39,12 +38,11 @@ fun RotatingSquares(modifier: Modifier) {
         translate(size.width / 2, size.height / 2) {
             val angle = (animatedProgress.value) * 0.0001f * 360f
             for (i in n downTo 0) {
-                rotate(angle * (n - i) * 0.05f, 0f, 0f) {
+                rotate((angle * (n - i + 1) * 0.05f), Offset(0f, 0f)) {
                     drawRect(
                         SolidColor(rectList[i].color),
                         rectList[i].offset,
                         Size(rectList[i].size, rectList[i].size),
-                        blendMode = BlendMode.Exclusion,
                         alpha = 0.7f
                     )
                 }

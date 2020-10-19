@@ -1,10 +1,7 @@
 package com.akash.canvasplayground.utils
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
+import androidx.compose.runtime.*
 import androidx.compose.runtime.dispatch.withFrameMillis
-import androidx.compose.runtime.launchInComposition
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.LifecycleOwnerAmbient
 import androidx.lifecycle.whenStarted
 
@@ -19,7 +16,7 @@ import androidx.lifecycle.whenStarted
 fun animationTimeMillis(): State<Long> {
     val millisState = mutableStateOf(0L)
     val lifecycleOwner = LifecycleOwnerAmbient.current
-    launchInComposition {
+    LaunchedTask {
         val startTime = withFrameMillis { it }
         lifecycleOwner.whenStarted {
             while (true) {

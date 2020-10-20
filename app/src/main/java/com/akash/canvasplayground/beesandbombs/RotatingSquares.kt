@@ -10,17 +10,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.akash.canvasplayground.utils.animationTimeMillis
 
 /**
- * Created by Akash on 16/10/20
+ * Created by Akash on 17/10/20
  */
+
 @Composable
 fun RotatingSquares(modifier: Modifier) {
-
     val animatedProgress = animationTimeMillis()
-    val n = 60
-    val rectSize = 20f
+    val n = 35
+    val rectSize = 15.dp
     val rectList = mutableListOf<Rect>()
     val colorList = listOf(
         Color(red = 40, green = 223, blue = 153),
@@ -29,20 +31,20 @@ fun RotatingSquares(modifier: Modifier) {
     )
     for (i in 0..n) {
         val s = rectSize * i
-        val offset = Offset(-s / 2, -s / 2)
-        val color = colorList[i % 3]
-        val rect = Rect(s, offset, color)
+        val offsetX = -s / 2
+        val offsetY = -s / 2
+        val rect = Rect(s, offsetX, offsetY, colorList[i % 3])
         rectList.add(rect)
     }
     Canvas(modifier = modifier.clipToBounds()) {
         translate(size.width / 2, size.height / 2) {
             val angle = (animatedProgress.value) * 0.0001f * 360f
             for (i in n downTo 0) {
-                rotate((angle * (n - i + 1) * 0.05f), Offset(0f, 0f)) {
+                rotate(angle * (n - i + 1) * 0.07f, Offset(0f, 0f)) {
                     drawRect(
-                        SolidColor(rectList[i].color),
-                        rectList[i].offset,
-                        Size(rectList[i].size, rectList[i].size),
+                        brush = SolidColor(rectList[i].color),
+                        Offset(rectList[i].offsetX.toPx(), rectList[i].offsetY.toPx()),
+                        Size(rectList[i].size.toPx(), rectList[i].size.toPx()),
                         alpha = 0.7f
                     )
                 }
@@ -52,7 +54,8 @@ fun RotatingSquares(modifier: Modifier) {
 }
 
 data class Rect(
-    val size: Float,
-    val offset: Offset,
+    val size: Dp,
+    val offsetX: Dp,
+    val offsetY: Dp,
     val color: Color
 )
